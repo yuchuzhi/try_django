@@ -2,6 +2,13 @@ from django.db import models
 from DjangoUeditor.models import UEditorField
 from django.contrib.auth.models import User
 
+
+body = UEditorField('内容', width=800, height=500, 
+                    toolbars="full", imagePath="upimg/", filePath="upfile/",
+                    upload_settings={"imageMaxSize": 1204000},
+                    settings={}, command=None, blank=True
+                    )
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField('博客分类', max_length=100)
@@ -56,7 +63,7 @@ class Article(models.Model):
     tui = models.ForeignKey(Tui, on_delete=models.DO_NOTHING, verbose_name='推荐位', blank=True, null=True)
 
     class Meta:
-        verbose_name = "标题"
+        verbose_name = "文章"
         verbose_name_plural = verbose_name
     
     def __str__(self):

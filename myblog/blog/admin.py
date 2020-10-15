@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from .models import Article, Category
+from .models import Article, Category, Tag, Tui, Banner, Link
 
 
 # Register your models here.
@@ -18,4 +17,24 @@ class ArticleAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'index')
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+
+
+@admin.register(Tui)
+class TuiAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text_info', 'img', 'link_url', 'is_active')
+
+
+@admin.register(Link)
+class LinkAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'linkurl') 
 

@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def home(request):
-    html = 'blog/home.html'
+    html = 'home.html'
 
     articles = Article.objects.all()
     context = {
@@ -43,6 +43,7 @@ def index(request):
 
 
 def list(request, lid):
+    html = 'blog/list.html'
     list = Article.objects.filter(category_id=lid)#获取通过URL传进来的lid，然后筛选出对应文章
     cname = Category.objects.get(id=lid)#获取当前文章的栏目名
     remen = Article.objects.filter(tui__id=2)[:2]#右侧的热门推荐
@@ -57,10 +58,11 @@ def list(request, lid):
         list = paginator.page(1)#如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         list = paginator.page(paginator.num_pages)#如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-    return render(request, 'list.html', locals())
+    return render(request, html, locals())
 
 
 def show(request,sid):
+    html = 'blog/show.html'
     show = Article.objects.get(id=sid)#查询指定ID的文章
     allcategory = Category.objects.all()#导航上的分类
     tags = Tag.objects.all()#右侧所有标签
@@ -70,9 +72,10 @@ def show(request,sid):
     next_blog = Article.objects.filter(created_time__lt=show.created_time,category=show.category.id).last()
     show.views = show.views + 1
     show.save()
-    return render(request, 'show.html', locals())
+    return render(request, html, locals())
 
 def tag(request, tag):
+    html = 'blog/tags.html'
     list = Article.objects.filter(tags__name=tag)#通过文章标签进行查询文章
     remen = Article.objects.filter(tui__id=2)[:6]
     allcategory = Category.objects.all()
@@ -86,9 +89,10 @@ def tag(request, tag):
         list = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         list = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-    return render(request, 'tags.html', locals())
+    return render(request, html, locals())
 
 def search(request):
+    html = 'blog/search.html'
     ss=request.GET.get('search')#获取搜索的关键词
     list = Article.objects.filter(title__icontains=ss)#获取到搜索关键词通过标题进行匹配
     remen = Article.objects.filter(tui__id=2)[:6]
@@ -102,7 +106,7 @@ def search(request):
         list = paginator.page(1) # 如果用户输入的页码不是整数时,显示第1页的内容
     except EmptyPage:
         list = paginator.page(paginator.num_pages) # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
-    return render(request, 'search.html', locals())
+    return render(request, html, locals())
 
 def about(request):
     pass

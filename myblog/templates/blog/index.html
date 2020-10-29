@@ -11,7 +11,7 @@
                             {% for b in banner %}
                                 <li class="slide fix-width">
                                     <a href="{{ b.link_url }}" title="{{ b.text_info }}">
-                                        <img src="{% url 'index' %}media/{{ b.img }}" srcset="{% url 'index' %}media/{{ b.img }}" alt="{{ b.text_info }}"
+                                        <img src="{% url 'home' %}media/{{ b.img }}" srcset="{% url 'home' %}media/{{ b.img }}" alt="{{ b.text_info }}"
                                          class="wp-post-image" width="370" height="290"/>
                                     </a>
                                     <span class="text ani-left"><strong>{{ b.text_info }}</strong></span>
@@ -94,7 +94,7 @@
             </section>
             </section>
             </section>
-            {% include 'test/right.html' %}
+            {% include 'blog/right.html' %}
 
         </aside>
         <div class="FriendLink hidden-xs clearfix">
